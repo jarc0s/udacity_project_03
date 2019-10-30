@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		88DCADBE236A443600ADF767 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCADBD236A443600ADF767 /* AppDelegate.swift */; };
-		88DCADC0236A443600ADF767 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCADBF236A443600ADF767 /* ViewController.swift */; };
 		88DCADC3236A443600ADF767 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88DCADC1236A443600ADF767 /* Main.storyboard */; };
 		88DCADC5236A443800ADF767 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88DCADC4236A443800ADF767 /* Assets.xcassets */; };
 		88DCADC8236A443800ADF767 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88DCADC6236A443800ADF767 /* LaunchScreen.storyboard */; };
@@ -36,7 +35,6 @@
 /* Begin PBXFileReference section */
 		88DCADBA236A443600ADF767 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DCADBD236A443600ADF767 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		88DCADBF236A443600ADF767 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		88DCADC2236A443600ADF767 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		88DCADC4236A443800ADF767 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88DCADC7236A443800ADF767 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -97,8 +95,9 @@
 		88DCADBC236A443600ADF767 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				88DCADEC236A491D00ADF767 /* Models */,
+				88DCADEB236A491300ADF767 /* Viewscontrollers */,
 				88DCADBD236A443600ADF767 /* AppDelegate.swift */,
-				88DCADBF236A443600ADF767 /* ViewController.swift */,
 				88DCADC1236A443600ADF767 /* Main.storyboard */,
 				88DCADC4236A443800ADF767 /* Assets.xcassets */,
 				88DCADC6236A443800ADF767 /* LaunchScreen.storyboard */,
@@ -123,6 +122,20 @@
 				88DCADDF236A443800ADF767 /* Info.plist */,
 			);
 			path = OnTheMapUITests;
+			sourceTree = "<group>";
+		};
+		88DCADEB236A491300ADF767 /* Viewscontrollers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Viewscontrollers;
+			sourceTree = "<group>";
+		};
+		88DCADEC236A491D00ADF767 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,7 +269,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88DCADC0236A443600ADF767 /* ViewController.swift in Sources */,
 				88DCADBE236A443600ADF767 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
