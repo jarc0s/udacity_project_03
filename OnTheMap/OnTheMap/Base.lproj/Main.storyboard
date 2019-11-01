@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2u1-oH-x73">
-                                <rect key="frame" x="37.5" y="100" width="300" height="338"/>
+                                <rect key="frame" x="37.5" y="100" width="300" height="373"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="8c8-Qw-AgQ">
                                         <rect key="frame" x="110" y="0.0" width="80" height="80"/>
@@ -57,7 +57,6 @@
                                         </state>
                                         <connections>
                                             <action selector="loginAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="stJ-y6-uEt"/>
-                                            <segue destination="pTS-MQ-CUP" kind="presentation" id="cjh-2O-Bj9"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kUK-HT-QzX">
@@ -84,6 +83,9 @@
                                             <constraint firstItem="hPk-OG-67z" firstAttribute="width" secondItem="kUK-HT-QzX" secondAttribute="width" multiplier="0.7" id="nCG-qn-USk"/>
                                         </constraints>
                                     </stackView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="t8s-mn-qFV">
+                                        <rect key="frame" x="140" y="353" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="S0G-fE-Mwa" firstAttribute="width" secondItem="kO5-ZF-IlV" secondAttribute="width" id="AXg-gB-JaD"/>
@@ -102,8 +104,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="t8s-mn-qFV" id="zfz-Fp-IhF"/>
+                        <outlet property="loginButton" destination="vOw-8G-3rO" id="pDe-P1-nC9"/>
+                        <outlet property="singupButton" destination="Xxb-Gx-Xlc" id="fhW-Dh-aEa"/>
                         <outlet property="userName" destination="kO5-ZF-IlV" id="9th-bm-eKl"/>
                         <outlet property="userPassword" destination="S0G-fE-Mwa" id="HrR-ad-1Ug"/>
+                        <segue destination="pTS-MQ-CUP" kind="show" identifier="segueToMainView" id="C5N-LC-aew"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

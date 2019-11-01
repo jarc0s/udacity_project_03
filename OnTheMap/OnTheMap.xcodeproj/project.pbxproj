@@ -14,6 +14,7 @@
 		0D62E75D236A91AD00298673 /* UsersLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D62E75C236A91AD00298673 /* UsersLocation.swift */; };
 		0D62E75F236A960000298673 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D62E75E236A960000298673 /* LoginViewController.swift */; };
 		0D62E764236A99DB00298673 /* OTM+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D62E763236A99DB00298673 /* OTM+Extensions.swift */; };
+		88570F09236C9120006D1C98 /* OTMResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88570F08236C9120006D1C98 /* OTMResponse.swift */; };
 		88DCADBE236A443600ADF767 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCADBD236A443600ADF767 /* AppDelegate.swift */; };
 		88DCADC3236A443600ADF767 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88DCADC1236A443600ADF767 /* Main.storyboard */; };
 		88DCADC5236A443800ADF767 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88DCADC4236A443800ADF767 /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		0D62E75C236A91AD00298673 /* UsersLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersLocation.swift; sourceTree = "<group>"; };
 		0D62E75E236A960000298673 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0D62E763236A99DB00298673 /* OTM+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OTM+Extensions.swift"; sourceTree = "<group>"; };
+		88570F08236C9120006D1C98 /* OTMResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMResponse.swift; sourceTree = "<group>"; };
 		88DCADBA236A443600ADF767 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DCADBD236A443600ADF767 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88DCADC2236A443600ADF767 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -89,8 +91,6 @@
 		0D62E750236A6CF800298673 /* WebService */ = {
 			isa = PBXGroup;
 			children = (
-				0D62E755236A759C00298673 /* OTM Response */,
-				0D62E754236A758700298673 /* OTM Request */,
 				0D62E751236A6DAF00298673 /* Client */,
 			);
 			path = WebService;
@@ -118,6 +118,7 @@
 				0D62E758236A76C400298673 /* UdacityUserResponse.swift */,
 				0D62E75A236A886F00298673 /* UserResponse.swift */,
 				0D62E75C236A91AD00298673 /* UsersLocation.swift */,
+				88570F08236C9120006D1C98 /* OTMResponse.swift */,
 			);
 			path = "OTM Response";
 			sourceTree = "<group>";
@@ -137,6 +138,16 @@
 				0D62E763236A99DB00298673 /* OTM+Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		88570F07236C90F4006D1C98 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0D62E755236A759C00298673 /* OTM Response */,
+				0D62E754236A758700298673 /* OTM Request */,
+			);
+			name = Models;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		88DCADB1236A443600ADF767 = {
@@ -162,6 +173,7 @@
 		88DCADBC236A443600ADF767 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				88570F07236C90F4006D1C98 /* Models */,
 				0D62E762236A99A800298673 /* Utils */,
 				0D62E761236A981100298673 /* Viewscontrollers */,
 				0D62E750236A6CF800298673 /* WebService */,
@@ -327,6 +339,7 @@
 				0D62E75B236A886F00298673 /* UserResponse.swift in Sources */,
 				0D62E764236A99DB00298673 /* OTM+Extensions.swift in Sources */,
 				88DCADBE236A443600ADF767 /* AppDelegate.swift in Sources */,
+				88570F09236C9120006D1C98 /* OTMResponse.swift in Sources */,
 				0D62E759236A76C400298673 /* UdacityUserResponse.swift in Sources */,
 				0D62E75D236A91AD00298673 /* UsersLocation.swift in Sources */,
 				0D62E757236A75D500298673 /* UdacityUserRequest.swift in Sources */,
