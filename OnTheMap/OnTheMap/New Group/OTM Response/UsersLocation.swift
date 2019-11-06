@@ -9,10 +9,10 @@
 import Foundation
 
 struct UsersLocationList: Codable {
-    let results: [UserLocation]
+    let results: [StudentInformation]
 }
 
-struct UserLocation: Codable {
+struct StudentInformation: Codable {
     let firstName: String
     let lastName: String
     let longitude: Double

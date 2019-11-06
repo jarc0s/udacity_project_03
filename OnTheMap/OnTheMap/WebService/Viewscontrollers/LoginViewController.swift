@@ -21,22 +21,45 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         activityIndicator.isHidden = true
+        userPassword.text = "crhonojp"
+        userName.text = "jp.ragnarok@gmail.com"
     }
     
     @IBAction func loginAction(_ sender: UIButton) {
-        setLoggingIn(true)
+        DispatchQueue.main.async {
+            self.setLoggingIn(true)
+        }
         OTMClient.login(userName: userName.getText(), password: userPassword.getText(), completion: handleLoginResponse(success:error:))
     }
     
     @IBAction func openURL(_ sender: UIButton) {
-        
+        if let url = URL(string: OTMClient.Endpoints.signUp) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     private func handleLoginResponse(success: Bool, error: Error?) {
-        setLoggingIn(false)
+        
         if success {
             //Go to next view
-            print("Succes")
+            //print("Succes")
+            //self.performSegue(withIdentifier: "segueToMainView", sender: nil)
+            OTMClient.getUserData(completion: handleUserResponse(success:error:))
+        }else {
+            DispatchQueue.main.async {
+                self.setLoggingIn(false)
+            }
+            showLoginFailure(message: error?.localizedDescription ?? "")
+        }
+    }
+    
+    
+    private func handleUserResponse(success: Bool, error: Error?) {
+        DispatchQueue.main.async {
+            self.setLoggingIn(false)
+        }
+        if success {
+            //Go to next view
             self.performSegue(withIdentifier: "segueToMainView", sender: nil)
         }else {
             showLoginFailure(message: error?.localizedDescription ?? "")
@@ -45,11 +68,13 @@ class LoginViewController: UIViewController {
     
     
     func setLoggingIn(_ loggingIn: Bool) {
-        if loggingIn {
-            activityIndicator.startAnimating()
-        } else {
-            activityIndicator.stopAnimating()
-        }
+        
+            if loggingIn {
+                self.activityIndicator.startAnimating()
+            } else {
+                self.activityIndicator.stopAnimating()
+            }
+        
         activityIndicator.isHidden = !loggingIn
         userName.isEnabled = !loggingIn
         userPassword.isEnabled = !loggingIn

@@ -20,8 +20,8 @@ struct UserResponse: Codable {
         case lastName = "last_name"
         case firtsName = "first_name"
         case accountKey = "key"
-        case nikcName
-        case imageUrl = ""
+        case nikcName = "nickname"
+        case imageUrl = "_image_url"
         case mail = "email"
     }
     

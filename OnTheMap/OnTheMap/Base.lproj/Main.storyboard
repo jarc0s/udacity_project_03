@@ -119,13 +119,16 @@
         <!--On the Map-->
         <scene sceneID="fJi-Zv-BUi">
             <objects>
-                <viewController id="61g-Fi-z9X" sceneMemberID="viewController">
+                <viewController id="61g-Fi-z9X" customClass="MapStudentLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mxw-1e-o2K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AVl-wN-Thb">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <connections>
+                                    <outlet property="delegate" destination="61g-Fi-z9X" id="K8g-9o-JF0"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -145,9 +148,17 @@
                                     <segue destination="59p-yt-fye" kind="show" identifier="segueToAddLocation" id="IGp-DB-iSv"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="icon_refresh" id="4Fp-70-0TN"/>
+                            <barButtonItem image="icon_refresh" id="4Fp-70-0TN">
+                                <connections>
+                                    <action selector="reloadAction:" destination="61g-Fi-z9X" id="j7i-8F-JDf"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="buttonReload" destination="4Fp-70-0TN" id="Wmz-xI-wIN"/>
+                        <outlet property="mapView" destination="AVl-wN-Thb" id="ms9-0o-3hU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbA-GL-Cle" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -156,7 +167,7 @@
         <!--Add Location-->
         <scene sceneID="kF4-4C-CyL">
             <objects>
-                <viewController id="Zqu-WV-oqL" sceneMemberID="viewController">
+                <viewController id="Zqu-WV-oqL" customClass="FindLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="trM-ei-XGK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -177,17 +188,17 @@
                                             <constraint firstAttribute="height" constant="50" id="Y9l-34-TyJ"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Gr-E5-JHc">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Place" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Gr-E5-JHc">
                                         <rect key="frame" x="0.0" y="160" width="300" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-o4-p8F">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Media link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-o4-p8F">
                                         <rect key="frame" x="0.0" y="205" width="300" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoO-NY-Abh">
                                         <rect key="frame" x="0.0" y="250" width="300" height="40"/>
@@ -198,6 +209,9 @@
                                         <state key="normal" title="FIND LOCATION">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="findAction:" destination="Zqu-WV-oqL" eventType="touchUpInside" id="Fd6-Sj-Y6q"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -216,9 +230,15 @@
                         <viewLayoutGuide key="safeArea" id="m5J-qb-PdF"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Location" id="NIr-9M-FFh">
-                        <barButtonItem key="leftBarButtonItem" title="CANCEL" id="Ofj-Cw-UdD"/>
+                        <barButtonItem key="leftBarButtonItem" title="CANCEL" id="Ofj-Cw-UdD">
+                            <connections>
+                                <action selector="closeView:" destination="Zqu-WV-oqL" id="Nm5-n0-zYI"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="locationName" destination="1Gr-E5-JHc" id="y1u-il-okZ"/>
+                        <outlet property="urlMedia" destination="Y97-o4-p8F" id="oYa-sn-ISr"/>
                         <segue destination="6fS-Vj-iMb" kind="show" identifier="segueLocationMap" id="684-FL-2QD"/>
                     </connections>
                 </viewController>
@@ -226,16 +246,19 @@
             </objects>
             <point key="canvasLocation" x="4520.8000000000002" y="-57.121439280359823"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Location View Controller-->
         <scene sceneID="Uk1-wD-drN">
             <objects>
-                <viewController id="6fS-Vj-iMb" sceneMemberID="viewController">
+                <viewController id="6fS-Vj-iMb" customClass="AddLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ITe-nf-8Gi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5XQ-re-dgD">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5XQ-re-dgD">
+                                <rect key="frame" x="0.0" y="66" width="375" height="554"/>
+                                <connections>
+                                    <outlet property="delegate" destination="6fS-Vj-iMb" id="T9f-TT-VJN"/>
+                                </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THL-Go-GiB">
                                 <rect key="frame" x="37.5" y="568" width="300" height="30"/>
@@ -243,6 +266,9 @@
                                 <state key="normal" title="FINISH">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="addLocationAction:" destination="6fS-Vj-iMb" eventType="touchUpInside" id="60B-FJ-8li"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -257,8 +283,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hR8-ym-zKD"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="5XQ-re-dgD" id="elv-cM-vZL"/>
+                        <segue destination="qmP-hm-nKI" kind="unwind" identifier="segueTotabBarController" unwindAction="unwindToTabBarControllerWithSegue:" id="4VH-cd-Z4i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jLx-sX-oiE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qmP-hm-nKI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5372" y="-57"/>
         </scene>
@@ -321,13 +352,13 @@
         <!--On the Map-->
         <scene sceneID="qoP-e3-B43">
             <objects>
-                <tableViewController id="mnA-Nh-bCF" sceneMemberID="viewController">
+                <tableViewController id="mnA-Nh-bCF" customClass="TableStudentLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="K4l-qL-XoU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="oOe-nL-IfH" detailTextLabel="VNc-3T-LkQ" imageView="XCa-tO-a0V" rowHeight="70" style="IBUITableViewCellStyleSubtitle" id="De0-Uo-eJY">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentInformationCell" textLabel="oOe-nL-IfH" detailTextLabel="VNc-3T-LkQ" imageView="XCa-tO-a0V" rowHeight="70" style="IBUITableViewCellStyleSubtitle" id="De0-Uo-eJY">
                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="De0-Uo-eJY" id="WvZ-bg-gQE">
@@ -369,9 +400,16 @@
                                     <segue destination="59p-yt-fye" kind="show" identifier="segueToAddLocation" id="43V-HI-QkD"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="icon_refresh" id="kuW-qi-cuv"/>
+                            <barButtonItem title="Item" image="icon_refresh" id="kuW-qi-cuv">
+                                <connections>
+                                    <action selector="reloadAction:" destination="mnA-Nh-bCF" id="TG2-lF-HmW"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="buttonReload" destination="kuW-qi-cuv" id="N8g-gb-L8t"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cu7-HX-DJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -404,6 +442,6 @@
         <image name="logo-u" width="62" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IGp-DB-iSv"/>
+        <segue reference="43V-HI-QkD"/>
     </inferredMetricsTieBreakers>
 </document>

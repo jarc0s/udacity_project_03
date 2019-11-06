@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D33C763236E231600BE78A2 /* OTMDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D33C762236E231600BE78A2 /* OTMDataSource.swift */; };
+		0D33C765236E269D00BE78A2 /* MapStudentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D33C764236E269D00BE78A2 /* MapStudentLocationViewController.swift */; };
+		0D33C767236E88AD00BE78A2 /* TableStudentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D33C766236E88AD00BE78A2 /* TableStudentLocationViewController.swift */; };
+		0D33C76B236EA26900BE78A2 /* FindLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D33C76A236EA26800BE78A2 /* FindLocationViewController.swift */; };
+		0D33C76D236EA4E600BE78A2 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D33C76C236EA4E600BE78A2 /* AddLocationViewController.swift */; };
+		0D4FF39B23711FC0009DBC0E /* UserUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4FF39A23711FC0009DBC0E /* UserUpdateRequest.swift */; };
+		0D4FF39D2371222A009DBC0E /* UserUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4FF39C2371222A009DBC0E /* UserUpdateResponse.swift */; };
 		0D62E753236A6E0100298673 /* OTMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D62E752236A6E0100298673 /* OTMClient.swift */; };
 		0D62E757236A75D500298673 /* UdacityUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D62E756236A75D500298673 /* UdacityUserRequest.swift */; };
 		0D62E759236A76C400298673 /* UdacityUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D62E758236A76C400298673 /* UdacityUserResponse.swift */; };
@@ -41,6 +48,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D33C762236E231600BE78A2 /* OTMDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMDataSource.swift; sourceTree = "<group>"; };
+		0D33C764236E269D00BE78A2 /* MapStudentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStudentLocationViewController.swift; sourceTree = "<group>"; };
+		0D33C766236E88AD00BE78A2 /* TableStudentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableStudentLocationViewController.swift; sourceTree = "<group>"; };
+		0D33C76A236EA26800BE78A2 /* FindLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindLocationViewController.swift; sourceTree = "<group>"; };
+		0D33C76C236EA4E600BE78A2 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		0D4FF39A23711FC0009DBC0E /* UserUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUpdateRequest.swift; sourceTree = "<group>"; };
+		0D4FF39C2371222A009DBC0E /* UserUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUpdateResponse.swift; sourceTree = "<group>"; };
 		0D62E752236A6E0100298673 /* OTMClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMClient.swift; sourceTree = "<group>"; };
 		0D62E756236A75D500298673 /* UdacityUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityUserRequest.swift; sourceTree = "<group>"; };
 		0D62E758236A76C400298673 /* UdacityUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityUserResponse.swift; sourceTree = "<group>"; };
@@ -108,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				0D62E756236A75D500298673 /* UdacityUserRequest.swift */,
+				0D4FF39A23711FC0009DBC0E /* UserUpdateRequest.swift */,
 			);
 			path = "OTM Request";
 			sourceTree = "<group>";
@@ -119,6 +134,7 @@
 				0D62E75A236A886F00298673 /* UserResponse.swift */,
 				0D62E75C236A91AD00298673 /* UsersLocation.swift */,
 				88570F08236C9120006D1C98 /* OTMResponse.swift */,
+				0D4FF39C2371222A009DBC0E /* UserUpdateResponse.swift */,
 			);
 			path = "OTM Response";
 			sourceTree = "<group>";
@@ -127,6 +143,10 @@
 			isa = PBXGroup;
 			children = (
 				0D62E75E236A960000298673 /* LoginViewController.swift */,
+				0D33C764236E269D00BE78A2 /* MapStudentLocationViewController.swift */,
+				0D33C766236E88AD00BE78A2 /* TableStudentLocationViewController.swift */,
+				0D33C76A236EA26800BE78A2 /* FindLocationViewController.swift */,
+				0D33C76C236EA4E600BE78A2 /* AddLocationViewController.swift */,
 			);
 			name = Viewscontrollers;
 			path = WebService/Viewscontrollers;
@@ -145,6 +165,7 @@
 			children = (
 				0D62E755236A759C00298673 /* OTM Response */,
 				0D62E754236A758700298673 /* OTM Request */,
+				0D33C762236E231600BE78A2 /* OTMDataSource.swift */,
 			);
 			name = Models;
 			path = "New Group";
@@ -335,7 +356,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D4FF39B23711FC0009DBC0E /* UserUpdateRequest.swift in Sources */,
+				0D33C76B236EA26900BE78A2 /* FindLocationViewController.swift in Sources */,
+				0D33C765236E269D00BE78A2 /* MapStudentLocationViewController.swift in Sources */,
 				0D62E75F236A960000298673 /* LoginViewController.swift in Sources */,
+				0D4FF39D2371222A009DBC0E /* UserUpdateResponse.swift in Sources */,
+				0D33C76D236EA4E600BE78A2 /* AddLocationViewController.swift in Sources */,
 				0D62E75B236A886F00298673 /* UserResponse.swift in Sources */,
 				0D62E764236A99DB00298673 /* OTM+Extensions.swift in Sources */,
 				88DCADBE236A443600ADF767 /* AppDelegate.swift in Sources */,
@@ -344,6 +370,8 @@
 				0D62E75D236A91AD00298673 /* UsersLocation.swift in Sources */,
 				0D62E757236A75D500298673 /* UdacityUserRequest.swift in Sources */,
 				0D62E753236A6E0100298673 /* OTMClient.swift in Sources */,
+				0D33C767236E88AD00BE78A2 /* TableStudentLocationViewController.swift in Sources */,
+				0D33C763236E231600BE78A2 /* OTMDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -504,7 +532,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -521,6 +549,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A4ZE6AACZL;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -539,6 +568,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A4ZE6AACZL;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

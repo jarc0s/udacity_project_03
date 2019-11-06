@@ -7,26 +7,33 @@
 //
 
 import Foundation
+import MapKit
 
 class OTMClient {
     
     struct Auth {
         static var accountKey = ""
         static var sessionId = ""
+        static var firtsName = ""
+        static var lastName = ""
     }
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
+        static let signUp = "https://auth.udacity.com/sign-up?next"
         
         case session
         case user
         case locations
+        case postLocation
         
         var stringValue: String {
             switch self {
                 case .session: return  Endpoints.base + "/session"
                 case .user: return Endpoints.base + "/users/\(Auth.accountKey)"
-                case .locations: return Endpoints.base + "/StudentLocation"
+                case .locations: return Endpoints.base + "/StudentLocation?limit=100&order=-updatedAt"
+                //case .updateLocation: return Endpoints.base + "/StudentLocation/\(Auth.sessionId)"
+                case .postLocation: return Endpoints.base + "/StudentLocation"
             }
         }
         
@@ -36,50 +43,34 @@ class OTMClient {
     }
     
     
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, fixData: Bool? = nil, completion: @escaping(ResponseType?, Error?) -> Void){
+    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType,  fixData: Bool? = nil, completion: @escaping(ResponseType?, Error?) -> Void){
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONEncoder().encode(body)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
             guard var data = data else {
                 completion(nil, error)
                 return
             }
             
-            if fixData != nil {
-                let range = 5..<data.count
-                data = data.subdata(in: range)
+            if let _fixData = fixData, _fixData == true {
+                data = data.subdata(in: 5..<data.count)
             }
             
             let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
-                }
+                completion(responseObject, nil)
             } catch {
-                do {
-                    let errorResponse = try decoder.decode(OTMResponse.self, from: data) as Error
-                    DispatchQueue.main.async {
-                        print("HERE: \(errorResponse.localizedDescription)")
-                        completion(nil, errorResponse)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        print("OR HERE")
-                        completion(nil, error)
-                    }
-                }
-                
+                completion(nil, error)
             }
         }
         task.resume()
     }
     
     
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, reponse: ResponseType.Type, fixData: Bool? = nil, completion: @escaping(ResponseType?, Error?) -> Void) {
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, reponse: ResponseType.Type, fixData: Bool? = nil, completion: @escaping(ResponseType?, Error?) -> Void){
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard var data = data else {
                 DispatchQueue.main.async {
@@ -88,29 +79,40 @@ class OTMClient {
                 return
             }
             
-            if fixData != nil {
-                let range = 5..<data.count
-                data = data.subdata(in: range)
+            if let _fixData = fixData, _fixData == true {
+                data = data.subdata(in: 5..<data.count)
             }
             
             let decoder = JSONDecoder()
-            
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
-                }
+                completion(responseObject, nil)
             } catch {
-                do {
-                    let errorResponse = try decoder.decode(OTMResponse.self, from: data) as Error
-                    DispatchQueue.main.async {
-                        completion(nil, errorResponse)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completion(nil, error)
-                    }
-                }
+                completion(nil, error)
+            }
+        }
+        task.resume()
+    }
+    
+    class func taskForPUTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping(ResponseType?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let databody = try! JSONEncoder().encode(body)
+        print("\(String(data: databody, encoding: .utf8))")
+        request.httpBody = databody
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                completion(nil, error)
+                return
+            }
+            print("data: \(String(data: data, encoding: .utf8))")
+            let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(ResponseType.self, from: data)
+                completion(responseObject, nil)
+            } catch {
+                completion(nil, error)
             }
         }
         task.resume()
@@ -126,7 +128,7 @@ class OTMClient {
                 Auth.accountKey = response.account.key
                 completion(true, nil)
             }else {
-                completion(false, error)
+                completion(false, nil)
             }
         }
     }
@@ -148,7 +150,7 @@ class OTMClient {
                 completion(false, error)
                 return
             }
-            let range = 5..<data!.count
+            let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             print(String(data: newData!, encoding: .utf8)!)
             completion(true, nil)
@@ -157,22 +159,45 @@ class OTMClient {
     }
     
     //MARK: - User
-    class func getUserData(completion: @escaping(UserResponse?, Error?) -> Void) {
-        taskForGETRequest(url: Endpoints.user.url, reponse: UserResponse.self) { response, error in
+    class func getUserData(completion: @escaping(Bool, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.user.url, reponse: UserResponse.self, fixData: true) { response, error in
             if let response = response {
-                completion(response, nil)
+                Auth.firtsName = "\(response.firtsName)"
+                Auth.lastName = "\(response.lastName)"
+                completion(true, nil)
             }else {
-                completion(nil, error)
+                completion(false, error)
             }
         }
     }
     
-    class func getUsersLocation(completion: @escaping(UsersLocationList?, Error?) -> Void) {
+    class func getUsersLocation(completion: @escaping(Bool, Error?) -> Void) {
         taskForGETRequest(url: Endpoints.locations.url, reponse: UsersLocationList.self) { response, error in
             if let response = response {
-                completion(response, nil)
+                
+                if let jsonData = try? JSONEncoder().encode(response),
+                    let jsonString = String(data: jsonData, encoding: .utf8) {
+                    OTMDataSource.saveStudenListModel(studenList: jsonString)
+                }
+                
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
             }else {
-                completion(nil, error)
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        }
+    }
+    
+    class func postUserLocation(location: CLLocationCoordinate2D, mediaUrl: String, mapString: String, completion: @escaping(Bool, Error?) -> Void) {
+        let body = UserUpdateRequest.init(uniqueKey: Auth.sessionId, firstName: Auth.firtsName, lastName: Auth.lastName, mapString: mapString, mediaURL: mediaUrl, latitude: location.latitude, longitude: location.longitude)
+        taskForPOSTRequest(url: Endpoints.postLocation.url, responseType: UserPostResponse.self, body: body) { response, error in
+            if response != nil {
+                completion(true, nil)
+            }else {
+                completion(false, error)
             }
         }
     }
