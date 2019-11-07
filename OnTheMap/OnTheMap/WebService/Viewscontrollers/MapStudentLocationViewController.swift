@@ -15,15 +15,15 @@ class MapStudentLocationViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var buttonReload: UIBarButtonItem!
     
-    var results: [StudentInformation] = [StudentInformation]()
+    private var studenInformationListViewModel = StudentInformationModel()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         taskForGetUserLocation()
     }
     
     private func taskForGetUserLocation() {
-        print("\(#function)")
-        self.buttonReload.isEnabled = false
+        buttonReload.isEnabled = false
         OTMClient.getUsersLocation(completion: handleListStudenResult(success:error:))
     }
     
@@ -32,19 +32,18 @@ class MapStudentLocationViewController: UIViewController {
     }
     
     private func handleListStudenResult(success: Bool, error: Error?) {
-        self.buttonReload.isEnabled = true
+        buttonReload.isEnabled = true
         if success {
-            self.results = OTMDataSource.getStudentList()
-            self.addPoints()
+            addPoints()
         }else {
             showUpdateFailure(message: error?.localizedDescription ?? "")
         }
     }
     
     private func addPoints() {
-        self.mapView.removeAnnotations(self.mapView.annotations)
+        mapView.removeAnnotations(mapView.annotations)
         var annotations = [MKPointAnnotation]()
-        for dictionary in results {
+        for dictionary in studenInformationListViewModel.studentInformations {
             
             // Notice that the float values are being used to create CLLocationDegree values.
             // This is a version of the Double type.
@@ -68,13 +67,13 @@ class MapStudentLocationViewController: UIViewController {
             annotations.append(annotation)
         }
         
-        self.mapView.addAnnotations(annotations)
+        mapView.addAnnotations(annotations)
     }
     
     func showUpdateFailure(message: String) {
         let alertVC = UIAlertController(title: "Get Student Location Failed", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
+        present(alertVC, animated: true, completion: nil)
     }
     
     @IBAction func logoutAction(_ sender: UIBarButtonItem) {
@@ -83,8 +82,7 @@ class MapStudentLocationViewController: UIViewController {
     
     func handleLogoutResponse(success: Bool, error: Error?) {
         if success {
-            //self.performSegue(withIdentifier: "segueToLogin", sender: nil)
-            self.dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
 }
@@ -110,7 +108,6 @@ extension MapStudentLocationViewController: MKMapViewDelegate {
         else {
             pinView!.annotation = annotation
         }
-        
         return pinView
     }
     
@@ -120,8 +117,8 @@ extension MapStudentLocationViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.openURL(URL(string: toOpen)!)
+            if let mediaUrl = view.annotation?.subtitle, let url = URL(string: mediaUrl ?? ""), app.canOpenURL(url) {
+                app.open(url, options: [:], completionHandler: nil)
             }
         }
     }

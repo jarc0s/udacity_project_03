@@ -39,12 +39,18 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="hJy-et-w0C"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S0G-fE-Mwa">
                                         <rect key="frame" x="0.0" y="205" width="300" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="78N-Pe-RcC"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOw-8G-3rO">
                                         <rect key="frame" x="0.0" y="250" width="300" height="40"/>
@@ -179,7 +185,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aLi-o3-0Dc">
-                                <rect key="frame" x="37.5" y="114" width="300" height="290"/>
+                                <rect key="frame" x="37.5" y="114" width="300" height="325"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="aUx-cA-ebK">
                                         <rect key="frame" x="110" y="0.0" width="80" height="80"/>
@@ -199,12 +205,18 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Zqu-WV-oqL" id="ZVW-jw-fUg"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Media link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-o4-p8F">
                                         <rect key="frame" x="0.0" y="205" width="300" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Zqu-WV-oqL" id="lVe-aI-2yD"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoO-NY-Abh">
                                         <rect key="frame" x="0.0" y="250" width="300" height="40"/>
@@ -219,6 +231,9 @@
                                             <action selector="findAction:" destination="Zqu-WV-oqL" eventType="touchUpInside" id="Fd6-Sj-Y6q"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jbp-sx-m6k">
+                                        <rect key="frame" x="140" y="305" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="PoO-NY-Abh" firstAttribute="width" secondItem="Y97-o4-p8F" secondAttribute="width" id="54E-Dt-4Ww"/>
@@ -243,6 +258,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="jbp-sx-m6k" id="NOX-P4-9J4"/>
+                        <outlet property="cancelButton" destination="Ofj-Cw-UdD" id="zGF-at-ShW"/>
+                        <outlet property="findButton" destination="PoO-NY-Abh" id="yij-Fm-s0c"/>
                         <outlet property="locationName" destination="1Gr-E5-JHc" id="y1u-il-okZ"/>
                         <outlet property="urlMedia" destination="Y97-o4-p8F" id="oYa-sn-ISr"/>
                         <segue destination="6fS-Vj-iMb" kind="show" identifier="segueLocationMap" id="684-FL-2QD"/>

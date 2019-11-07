@@ -42,8 +42,6 @@ class LoginViewController: UIViewController {
         
         if success {
             //Go to next view
-            //print("Succes")
-            //self.performSegue(withIdentifier: "segueToMainView", sender: nil)
             OTMClient.getUserData(completion: handleUserResponse(success:error:))
         }else {
             DispatchQueue.main.async {
@@ -59,8 +57,7 @@ class LoginViewController: UIViewController {
             self.setLoggingIn(false)
         }
         if success {
-            //Go to next view
-            self.performSegue(withIdentifier: "segueToMainView", sender: nil)
+            performSegue(withIdentifier: "segueToMainView", sender: nil)
         }else {
             showLoginFailure(message: error?.localizedDescription ?? "")
         }
@@ -69,11 +66,7 @@ class LoginViewController: UIViewController {
     
     func setLoggingIn(_ loggingIn: Bool) {
         
-            if loggingIn {
-                self.activityIndicator.startAnimating()
-            } else {
-                self.activityIndicator.stopAnimating()
-            }
+        loggingIn ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
         
         activityIndicator.isHidden = !loggingIn
         userName.isEnabled = !loggingIn
@@ -90,5 +83,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func unwindToLoginView(segue:UIStoryboardSegue) {
         print("delete session")
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

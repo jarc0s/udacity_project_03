@@ -14,6 +14,14 @@ class FindLocationViewController: UIViewController {
 
     @IBOutlet weak var locationName: UITextField!
     @IBOutlet weak var urlMedia: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var findButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.isHidden = true
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueLocationMap" {
@@ -26,36 +34,58 @@ class FindLocationViewController: UIViewController {
     }
     
     @IBAction func findAction(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.setFindingIn(true)
+        }
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(locationName.getText()) { (placemarks, error) in
+            DispatchQueue.main.async {
+                self.setFindingIn(false)
+            }
             guard
                 let placemarks = placemarks,
                 let location = placemarks.first?.location
                 else {
                     // handle no location found
-                    print("location not found")
                     self.showLocationFailure(message: "Location not found")
                     return
             }
             
             // Use your location
-            print("Go to map: \(location.coordinate.latitude) - \(location.coordinate.longitude)")
             self.performSegue(withIdentifier: "segueLocationMap", sender: location)
         }
     }
     
     func showLocationFailure(message: String) {
-        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        let alertVC = UIAlertController(title: "Location Failed", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
+        present(alertVC, animated: true, completion: nil)
     }
     
     @IBAction func closeView(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func unwindToTabBarController(segue:UIStoryboardSegue) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
+    func setFindingIn(_ findingIn: Bool) {
+        
+        findingIn ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+        
+        activityIndicator.isHidden = !findingIn
+        locationName.isEnabled = !findingIn
+        urlMedia.isEnabled = !findingIn
+        cancelButton.isEnabled = !findingIn
+        findButton.isEnabled = !findingIn
+    }
+    
+}
+
+extension FindLocationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

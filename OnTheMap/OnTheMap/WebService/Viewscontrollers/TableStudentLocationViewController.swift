@@ -12,23 +12,18 @@ import UIKit
 class TableStudentLocationViewController: UITableViewController  {
     @IBOutlet weak var buttonReload: UIBarButtonItem!
     
-    var results: [StudentInformation] = [StudentInformation]()
-    
-    override func viewDidLoad() {
-        self.results = OTMDataSource.getStudentList()
-    }
+    private var studenInformationListViewModel = StudentInformationModel()
     
     
     @IBAction func reloadAction(_ sender: Any) {
-        self.buttonReload.isEnabled = false
+        buttonReload.isEnabled = false
         OTMClient.getUsersLocation(completion: handleListStudenResult(success:error:))
     }
     
     private func handleListStudenResult(success: Bool, error: Error?) {
         self.buttonReload.isEnabled = true
         if success {
-            self.results = OTMDataSource.getStudentList()
-            self.tableView.reloadData()
+            tableView.reloadData()
         }else {
             print("sin datos de los estudiantes")
         }
@@ -37,7 +32,7 @@ class TableStudentLocationViewController: UITableViewController  {
     func showUpdateFailure(message: String) {
         let alertVC = UIAlertController(title: "Get Student Location Failed", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
+        present(alertVC, animated: true, completion: nil)
     }
     
     
@@ -47,8 +42,7 @@ class TableStudentLocationViewController: UITableViewController  {
     
     func handleLogoutResponse(success: Bool, error: Error?) {
         if success {
-            //self.performSegue(withIdentifier: "segueToLogin", sender: nil)
-            self.dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
     
@@ -59,12 +53,12 @@ class TableStudentLocationViewController: UITableViewController  {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
+        return studenInformationListViewModel.numberOfRows(section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let studentInfo = self.results[indexPath.row]
+        let studentInfo = studenInformationListViewModel.modelAt(indexPath.row)
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentInformationCell")!
         
@@ -75,8 +69,12 @@ class TableStudentLocationViewController: UITableViewController  {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let studentInfo = self.results[indexPath.row]
+        let studentInfo = studenInformationListViewModel.modelAt(indexPath.row)
         let app = UIApplication.shared
-        app.openURL(URL(string: studentInfo.mediaURL)!)
+        if let url = URL(string: studentInfo.mediaURL), app.canOpenURL(url) {
+            app.open(url, options: [:], completionHandler: nil)
+        }else {
+            print("Invalid input URL")
+        }
     }
 }

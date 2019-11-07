@@ -32,7 +32,6 @@ class OTMClient {
                 case .session: return  Endpoints.base + "/session"
                 case .user: return Endpoints.base + "/users/\(Auth.accountKey)"
                 case .locations: return Endpoints.base + "/StudentLocation?limit=100&order=-updatedAt"
-                //case .updateLocation: return Endpoints.base + "/StudentLocation/\(Auth.sessionId)"
                 case .postLocation: return Endpoints.base + "/StudentLocation"
             }
         }
@@ -98,16 +97,18 @@ class OTMClient {
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         let databody = try! JSONEncoder().encode(body)
-        print("\(String(data: databody, encoding: .utf8))")
         request.httpBody = databody
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 completion(nil, error)
                 return
             }
-            print("data: \(String(data: data, encoding: .utf8))")
+            
             let decoder = JSONDecoder()
+            
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 completion(responseObject, nil)
@@ -128,7 +129,7 @@ class OTMClient {
                 Auth.accountKey = response.account.key
                 completion(true, nil)
             }else {
-                completion(false, nil)
+                completion(false, error)
             }
         }
     }
@@ -150,9 +151,6 @@ class OTMClient {
                 completion(false, error)
                 return
             }
-            let range = Range(5..<data!.count)
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(String(data: newData!, encoding: .utf8)!)
             completion(true, nil)
         }
         task.resume()

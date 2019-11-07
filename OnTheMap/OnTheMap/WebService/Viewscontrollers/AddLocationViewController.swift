@@ -55,7 +55,7 @@ class AddLocationViewController: UIViewController {
     func showUpdateFailure(message: String) {
         let alertVC = UIAlertController(title: "Update Location Failed", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
+        present(alertVC, animated: true, completion: nil)
     }
     
 }
@@ -77,7 +77,6 @@ extension AddLocationViewController: MKMapViewDelegate {
             pinView!.canShowCallout = true
             pinView!.pinTintColor = .red
             pinView?.rightCalloutAccessoryView?.isHidden = true
-            //pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         else {
             pinView!.annotation = annotation
