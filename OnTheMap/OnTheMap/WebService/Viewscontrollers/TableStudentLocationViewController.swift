@@ -34,6 +34,25 @@ class TableStudentLocationViewController: UITableViewController  {
         }
     }
     
+    func showUpdateFailure(message: String) {
+        let alertVC = UIAlertController(title: "Get Student Location Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func logoutAction(_ sender: UIBarButtonItem) {
+        OTMClient.logout(completion: handleLogoutResponse(success:error:))
+    }
+    
+    func handleLogoutResponse(success: Bool, error: Error?) {
+        if success {
+            //self.performSegue(withIdentifier: "segueToLogin", sender: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: UITableViewDelegate
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -55,4 +74,9 @@ class TableStudentLocationViewController: UITableViewController  {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let studentInfo = self.results[indexPath.row]
+        let app = UIApplication.shared
+        app.openURL(URL(string: studentInfo.mediaURL)!)
+    }
 }

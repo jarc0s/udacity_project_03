@@ -37,7 +37,7 @@ class MapStudentLocationViewController: UIViewController {
             self.results = OTMDataSource.getStudentList()
             self.addPoints()
         }else {
-            print("sin datos de los estudiantes")
+            showUpdateFailure(message: error?.localizedDescription ?? "")
         }
     }
     
@@ -69,6 +69,23 @@ class MapStudentLocationViewController: UIViewController {
         }
         
         self.mapView.addAnnotations(annotations)
+    }
+    
+    func showUpdateFailure(message: String) {
+        let alertVC = UIAlertController(title: "Get Student Location Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func logoutAction(_ sender: UIBarButtonItem) {
+        OTMClient.logout(completion: handleLogoutResponse(success:error:))
+    }
+    
+    func handleLogoutResponse(success: Bool, error: Error?) {
+        if success {
+            //self.performSegue(withIdentifier: "segueToLogin", sender: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

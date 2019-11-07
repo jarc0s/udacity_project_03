@@ -87,4 +87,8 @@ class LoginViewController: UIViewController {
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         show(alertVC, sender: nil)
     }
+    
+    @IBAction func unwindToLoginView(segue:UIStoryboardSegue) {
+        print("delete session")
+    }
 }
